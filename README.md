@@ -29,7 +29,7 @@ downtime for a device during scheduled maintenance to avoid trap storms.
 ### Ubuntu
 
 ```bash
-$ sudo apt-get install libmysqlclient-dev libsnmp-dev
+$ sudo apt-get install libmysqlclient-dev libsnmp-dev python-dev
 ```
 
 ## Installation

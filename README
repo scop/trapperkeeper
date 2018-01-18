@@ -36,7 +36,7 @@ Ubuntu
 
 .. code:: bash
 
-    $ sudo apt-get install libmysqlclient-dev libsnmp-dev
+    $ sudo apt-get install libmysqlclient-dev libsnmp-dev python-dev
 
 Installation
 ------------
