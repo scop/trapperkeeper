@@ -117,7 +117,14 @@ config:
     # Type: str
     community: null
 
+    # Listen for traps on an IPv4 address
+    #
+    # Type: bool or str (IPv4 address)
+    # Default: true (0.0.0.0)
+    #ipv4: false
+
     # Listen for traps on an IPv6 address
     #
-    # Type: bool
-    ipv6: false
+    # Type: bool or str (IPv6 address)
+    # Default: false (::1 when true)
+    #ipv6: true
