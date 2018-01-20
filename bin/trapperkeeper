@@ -52,9 +52,8 @@ def main():
     community = config["community"]
     if not community:
         community = None
-    ipv6_server = config["ipv6"]
-    if not ipv6_server:
-        ipv6_server = None
+    ipv4 = config.get("ipv4", True)
+    ipv6 = config.get("ipv6", False)
     Session.configure(bind=db_engine)
 
     conn = Session()
@@ -71,13 +70,18 @@ def main():
 
     transport_dispatcher = AsynsockDispatcher()
     transport_dispatcher.registerRecvCbFun(cb)
-    if ipv6_server:
+    if ipv6 is not False:
+        ipv6_addr = "::1" if ipv6 is True else ipv6
         transport_dispatcher.registerTransport(
-            udp6.domainName, udp6.Udp6SocketTransport().openServerMode(("::1", int(config["trap_port"])))
+            udp6.domainName, udp6.Udp6SocketTransport().openServerMode(
+                (ipv6_addr, int(config["trap_port"])))
         )
-    transport_dispatcher.registerTransport(
-        udp.domainName, udp.UdpSocketTransport().openServerMode(("0.0.0.0", int(config["trap_port"])))
-    )
+    if ipv4 is not False:
+        ipv4_addr = "0.0.0.0" if ipv4 is True else ipv4
+        transport_dispatcher.registerTransport(
+            udp.domainName, udp.UdpSocketTransport().openServerMode(
+                (ipv4_addr, int(config["trap_port"])))
+        )
 
     transport_dispatcher.jobStarted(1)
     stats_thread = threading.Thread(target=stats_server, args=(str(config["stats_port"]),))
