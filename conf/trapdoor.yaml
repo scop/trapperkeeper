@@ -5,7 +5,7 @@
 # Type: str
 database: "sqlite:///trapperkeeper.sqlite"
 
-# Number of worker processes to fork for receving requests. This option
+# Number of worker processes to fork for receiving requests. This option
 # is mutually exclusive with debug.
 #
 # Type: int
