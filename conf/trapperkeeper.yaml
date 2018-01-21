@@ -44,6 +44,11 @@ defaults:
         # Type: str
         recipients: "root@localhost"
 
+        # The sender of the message. Defaults to "trapperkeeper@localhost".
+        #
+        # Type: str
+        sender: "trapperkeeper@localhost"
+
     # When running multiple instances of trapperkeeper as a manager for a
     # given device, the message will be deduplicated in the database. If
     # you want the e-mail to be sent even when the message has been

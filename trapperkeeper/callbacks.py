@@ -54,6 +54,7 @@ class TrapperCallback(object):
         recipients = handler["mail"].get("recipients")
         if not recipients:
             return
+        sender = handler["mail"].get("sender", "trapperkeeper@localhost")
 
         subject = handler["mail"]["subject"] % {
             "trap_oid": trap.oid,
@@ -64,7 +65,7 @@ class TrapperCallback(object):
         ctxt = dict(trap=trap, dest_host=self.hostname)
         try:
             stats.incr("mail_sent_attempted", 1)
-            send_trap_email(recipients, "trapperkeeper",
+            send_trap_email(recipients, sender,
                             subject, self.template_env, ctxt)
             stats.incr("mail_sent_successful", 1)
         except socket.error as err:
